@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dduwid2tn130a"]
+
+[ext_resource type="PackedScene" uid="uid://cshemh8s81fbm" path="res://player.tscn" id="1_dht4i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57qmd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 1
+background_color = Color(0.43005174, 0.33069658, 0.7132065, 1)
+
+[node name="Blackjack_game" type="Node3D" unique_id=1134091459]
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1859372483]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls" unique_id=115138094]
+use_collision = true
+size = Vector3(30, 10, 30)
+material = SubResource("StandardMaterial3D_57qmd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls/CSGBox3D" unique_id=507393486]
+operation = 2
+size = Vector3(29.8, 10, 29.8)
+material = SubResource("StandardMaterial3D_57qmd")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1150538121]
+
+[node name="Mesh" type="MeshInstance3D" parent="Floor" unique_id=107319223]
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1406782645]
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=151763477]
+transform = Transform3D(0.9961947, 0.06676517, -0.05602263, 0, 0.64278764, 0.76604444, 0.08715574, -0.7631294, 0.64034164, 0, 20, 0)
+
+[node name="Player" parent="." unique_id=874559492 instance=ExtResource("1_dht4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=846044468]
+environment = SubResource("Environment_g4v7s")

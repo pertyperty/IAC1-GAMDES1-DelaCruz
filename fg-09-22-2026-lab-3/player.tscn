@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cshemh8s81fbm"]
+
+[ext_resource type="Script" uid="uid://coxp1hb1isa1o" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yf5fn"]
+radius = 0.4
+height = 1.8
+
+[node name="Player" type="Node3D" unique_id=874559492]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1697428584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("1_4flbx")
+
+[node name="Body Collision" type="CollisionShape3D" parent="CharacterBody3D" unique_id=2062641681]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Body" type="MeshInstance3D" parent="CharacterBody3D" unique_id=338777627]
+mesh = SubResource("CapsuleMesh_yf5fn")
+
+[node name="CameraArm" type="SpringArm3D" parent="CharacterBody3D" unique_id=792313499]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 1.5, 3)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraArm" unique_id=2099905592]
+current = true
+fov = 80.0
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=535004157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
