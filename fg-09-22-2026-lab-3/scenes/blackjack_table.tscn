@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b2ww8e2ee3jt1"]
+
+[node name="BlackjackTable" type="Node3D" unique_id=1614041322]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=831983015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=830117950]
+use_collision = true
+size = Vector3(6, 0.3, 3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/CSGBox3D" unique_id=1697138149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 2
+size = Vector3(5.7, 0.1, 2.7)

@@ -28,7 +28,7 @@ func _physics_process(delta):
 		"move_left",
 		"move_right",
 		"move_forward",
-		"move_backward"
+		"move_backward",
 	)
 
 	var direction := transform.basis * Vector3(
