@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-@export var move_speed: float = 4.0
+@export var move_speed: float = 4.5
 @export var mouse_sensitivity: float = 0.002
-
+@export var jump_velocity: float = 5
+@export var gravity: float = 9.8
 @onready var camera_arm: SpringArm3D = $CameraArm
 
 var camera_pitch: float = -15.0
@@ -14,7 +15,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 
-		camera_pitch -= event.relative.y * mouse_sensitivity
+		camera_pitch -= event.relative.y * mouse_sensitivity * 10
 		camera_pitch = clamp(camera_pitch, -60.0, 30.0)
 
 		camera_arm.rotation.x = deg_to_rad(camera_pitch)
@@ -31,11 +32,12 @@ func _physics_process(delta):
 		"move_backward",
 	)
 
+
 	var direction := transform.basis * Vector3(
 		input_vector.x,
 		0,
 		input_vector.y
-	)
+	).normalized()
 
 	direction.y = 0
 	direction = direction.normalized()
@@ -43,9 +45,21 @@ func _physics_process(delta):
 	velocity.x = direction.x * move_speed
 	velocity.z = direction.z * move_speed
 
+	# Add gravity if the character is not on the floor.
 	if not is_on_floor():
-		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
+		velocity.y -= gravity * delta
+
+	# Handle jump when the jump button is pressed and character is on the floor.
+	if Input.is_action_just_pressed("move_jump") and is_on_floor():
+		velocity.y = jump_velocity
+
+
+	if direction:
+		velocity.x = direction.x * move_speed
+		velocity.z = direction.z * move_speed
 	else:
-		velocity.y = 0
+		velocity.x = move_toward(velocity.x, 0, move_speed)
+		velocity.z = move_toward(velocity.z, 0, move_speed)
+
 
 	move_and_slide()

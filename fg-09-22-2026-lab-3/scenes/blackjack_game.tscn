@@ -13,20 +13,21 @@ size = Vector3(30, 0.2, 30)
 
 [sub_resource type="Environment" id="Environment_g4v7s"]
 background_mode = 1
-background_color = Color(0.43005174, 0.33069658, 0.7132065, 1)
+background_color = Color(0.28388447, 0.43683544, 0.50450873, 1)
 
 [node name="Blackjack_game" type="Node3D" unique_id=1134091459]
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1859372483]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Walls" unique_id=115138094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 use_collision = true
-size = Vector3(30, 10, 30)
+size = Vector3(30, 5, 30)
 material = SubResource("StandardMaterial3D_57qmd")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Walls/CSGBox3D" unique_id=507393486]
 operation = 2
-size = Vector3(29.8, 10, 29.8)
+size = Vector3(29.8, 5, 29.8)
 material = SubResource("StandardMaterial3D_57qmd")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1150538121]
@@ -46,4 +47,4 @@ environment = SubResource("Environment_g4v7s")
 [node name="Player" parent="." unique_id=874559492 instance=ExtResource("1_vffvs")]
 
 [node name="BlackjackTable" parent="." unique_id=1614041322 instance=ExtResource("2_d5lkx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28835392, 0.34338737, -3.1690474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28835392, -0.2646067, -3.1690474)
