@@ -69,19 +69,24 @@ func player_stand():
 		return
 
 	state = GameState.DEALER_TURN
-	play_dealer_turn()
 
 
-func play_dealer_turn():
-	while dealer.should_hit():
+func dealer_play_step() -> bool:
+	if state != GameState.DEALER_TURN:
+		return false
+
+	if dealer.should_hit():
 		var card := deck.draw_card()
 
 		if card == null:
-			break
+			determine_result()
+			return false
 
 		dealer.add_card(card)
+		return true
 
 	determine_result()
+	return false
 
 
 func determine_result():

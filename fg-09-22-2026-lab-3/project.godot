@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="fg-09-22-2026-Lab3"
+config/name="MG-2026-09-22-Lab3"
 run/main_scene="uid://dduwid2tn130a"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

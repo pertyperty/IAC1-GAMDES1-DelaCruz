@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dlstca0tktx8"]
+
+[ext_resource type="Script" uid="uid://dp1skcjltast3" path="res://scripts/blackjack/card_visual.gd" id="1_tgmmg"]
+[ext_resource type="Texture2D" uid="uid://dma5p33aob7rc" path="res://assets/texture208.png" id="1_yiag5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+albedo_texture = ExtResource("1_yiag5")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.8282088
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+
+[node name="Card" type="Node3D" unique_id=1942398808]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_tgmmg")
+
+[node name="CardMesh" type="MeshInstance3D" parent="." unique_id=1755638208]
+transform = Transform3D(0.7, 0, 0, 0, 0.05, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yf5fn")
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="FrontLabel" type="Label3D" parent="." unique_id=1510666618]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.03, 0)
+text = "Test
+Test"
+font_size = 64
+
+[node name="BackLabel" type="Label3D" parent="." unique_id=1785796816]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, -0.03, 0)
+visible = false
+text = "CARD"

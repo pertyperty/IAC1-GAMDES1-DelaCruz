@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://b2ww8e2ee3jt1"]
 
+[ext_resource type="Texture2D" uid="uid://bg5yi0y2x57x5" path="res://assets/texture210.png" id="1_tcvgt"]
+[ext_resource type="Script" uid="uid://lsjivkcg0df4" path="res://scripts/blackjack/blackjack_table.gd" id="1_ul5vv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jj7t"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgmmg"]
+albedo_color = Color(0.69789743, 0, 0, 1)
+albedo_texture = ExtResource("1_tcvgt")
+uv1_scale = Vector3(1.1, 1.1, 1.1)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(5.75, 2, 4)
+
 [node name="BlackjackTable" type="Node3D" unique_id=1614041322]
+script = ExtResource("1_ul5vv")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=831983015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -8,8 +24,132 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=830117950]
 use_collision = true
 size = Vector3(6, 0.3, 3)
+material = SubResource("StandardMaterial3D_4jj7t")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Node3D/CSGBox3D" unique_id=1697138149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0)
+material_override = SubResource("StandardMaterial3D_tgmmg")
+cast_shadow = 0
 operation = 2
 size = Vector3(5.7, 0.1, 2.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D" unique_id=999284123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0521667, 0)
+material_override = SubResource("StandardMaterial3D_tgmmg")
+cast_shadow = 0
+size = Vector3(5.7, 0.01, 2.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D" unique_id=41952813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 0, 0)
+use_collision = true
+size = Vector3(0.01, 0.3, 2.7)
+material = SubResource("StandardMaterial3D_4jj7t")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D" unique_id=1123990460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85, 0, 0)
+use_collision = true
+size = Vector3(0.01, 0.3, 2.7)
+material = SubResource("StandardMaterial3D_4jj7t")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D" unique_id=1240221239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.35)
+use_collision = true
+size = Vector3(5.7, 0.3, 0.01)
+material = SubResource("StandardMaterial3D_4jj7t")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D" unique_id=1652410852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.35)
+use_collision = true
+size = Vector3(5.7, 0.3, 0.01)
+material = SubResource("StandardMaterial3D_4jj7t")
+
+[node name="PlayerCardPos" type="Node3D" parent="." unique_id=2042516438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07, 0.8)
+
+[node name="CardPos1" type="Marker3D" parent="PlayerCardPos" unique_id=1385830324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+
+[node name="CardPos2" type="Marker3D" parent="PlayerCardPos" unique_id=1734607399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+
+[node name="DealerCardPos" type="Node3D" parent="." unique_id=1938319985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07, -0.8)
+
+[node name="CardPos1" type="Marker3D" parent="DealerCardPos" unique_id=30323454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+
+[node name="CardPos2" type="Marker3D" parent="DealerCardPos" unique_id=269928946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+
+[node name="ResultLabel" type="Label3D" parent="." unique_id=1136254814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "BLACKJACK"
+font_size = 64
+
+[node name="GameUI" type="CanvasLayer" parent="." unique_id=137468992]
+visible = false
+
+[node name="Controls" type="Control" parent="GameUI" unique_id=561970823]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HitButton" type="Button" parent="GameUI/Controls" unique_id=1874225864]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 500.0
+offset_right = 500.0
+offset_bottom = 560.0
+text = "HIT"
+
+[node name="StandButton" type="Button" parent="GameUI/Controls" unique_id=1164332920]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 500.0
+offset_right = 800.0
+offset_bottom = 560.0
+text = "STAND"
+
+[node name="NewRoundButton" type="Button" parent="GameUI/Controls" unique_id=1141808467]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -73.0
+offset_right = 75.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "AGAIN!"
+
+[node name="PlayerValueLabel" type="Label3D" parent="." unique_id=1128717710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.8, 0)
+text = "PLAYER: 0"
+font_size = 64
+
+[node name="DealerValueLabel" type="Label3D" parent="." unique_id=1920464386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.8, 0)
+text = "DEALER: ?"
+font_size = 64
+
+[node name="StatusLabel" type="Label3D" parent="." unique_id=1428457292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "PLACE YOUR BET"
+font_size = 64
+
+[node name="CameraPosition" type="Node3D" parent="." unique_id=811148816]
+transform = Transform3D(1, 0, 0, 0, 0.7569951, 0.65342057, 0, -0.65342057, 0.7569951, 0, 3.5, 2.4611866)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPosition" unique_id=2144341034]
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=2089010825]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1753500245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+shape = SubResource("BoxShape3D_yf5fn")
