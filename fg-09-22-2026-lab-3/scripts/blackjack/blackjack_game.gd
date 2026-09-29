@@ -3,6 +3,7 @@ extends RefCounted
 
 enum GameState {
 	IDLE,
+	BETTING,
 	PLAYER_TURN,
 	DEALER_TURN,
 	ROUND_OVER
@@ -15,6 +16,10 @@ var dealer: BlackjackDealer
 var state: GameState = GameState.IDLE
 var result: String = ""
 
+var player_balance: int = 1000
+var current_bet: int = 0
+var round_settled: bool = true
+
 
 func _init():
 	deck = BlackjackDeck.new()
@@ -22,7 +27,39 @@ func _init():
 	dealer = BlackjackDealer.new()
 
 
-func start_round():
+func start_betting():
+	if state != GameState.IDLE and state != GameState.ROUND_OVER:
+		return
+
+	current_bet = 0
+	result = ""
+	state = GameState.BETTING
+
+
+func place_bet(amount: int) -> bool:
+	if state != GameState.BETTING:
+		return false
+
+	if amount <= 0:
+		return false
+
+	if amount > player_balance:
+		return false
+
+	current_bet = amount
+	return true
+
+
+func start_round() -> bool:
+	if state != GameState.BETTING:
+		return false
+
+	if current_bet <= 0:
+		return false
+
+	player_balance -= current_bet
+	round_settled = false
+
 	deck.reset()
 	deck.shuffle()
 
@@ -36,6 +73,8 @@ func start_round():
 
 	if player_hand.is_blackjack() or dealer.hand.is_blackjack():
 		finish_initial_blackjack_check()
+
+	return true
 
 
 func deal_initial_cards():
@@ -113,6 +152,29 @@ func finish_initial_blackjack_check():
 	state = GameState.ROUND_OVER
 
 
+func settle_round():
+	if state != GameState.ROUND_OVER:
+		return
+
+	if round_settled:
+		return
+
+	match result:
+		"Player wins":
+			player_balance += current_bet * 2
+
+		"Player wins - Blackjack":
+			player_balance += int(current_bet * 2.5)
+
+		"Push":
+			player_balance += current_bet
+
+		"Dealer wins":
+			pass
+
+	round_settled = true
+
+
 func reset():
 	deck.reset()
 	player_hand.clear()
@@ -120,3 +182,6 @@ func reset():
 
 	state = GameState.IDLE
 	result = ""
+
+	current_bet = 0
+	round_settled = true

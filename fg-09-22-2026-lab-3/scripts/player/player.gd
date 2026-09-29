@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @export var move_speed: float = 4.0
+@export var jump_velocity: float = 5.5
 @export var mouse_sensitivity: float = 0.002
 
 @onready var camera_arm: SpringArm3D = $CameraArm
@@ -14,13 +15,17 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and not in_blackjack:
-		rotate_y(-event.relative.x * mouse_sensitivity)
+		# Rotate the player left and right.
+		rotate_y(-event.screen_relative.x * mouse_sensitivity)
 
-		camera_pitch -= event.relative.y * mouse_sensitivity
-		camera_pitch = clamp(camera_pitch, -60.0, 30.0)
+		# Rotate the camera up and down.
+		camera_pitch -= event.screen_relative.y * mouse_sensitivity * 10
+		# Limit how far the camera can look up or down.
+		camera_pitch = clamp(camera_pitch, -60.0, 60.0)
 
+		# Apply the vertical rotation to the SpringArm3D.
 		camera_arm.rotation.x = deg_to_rad(camera_pitch)
 
 	if event is InputEventKey:
@@ -55,10 +60,13 @@ func _physics_process(delta):
 	velocity.x = direction.x * move_speed
 	velocity.z = direction.z * move_speed
 
+	if is_on_floor() and Input.is_action_just_pressed("move_jump"):
+		velocity.y = jump_velocity
+
 	if not is_on_floor():
-		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
-	else:
-		velocity.y = 0
+		velocity.y -= ProjectSettings.get_setting(
+			"physics/3d/default_gravity"
+		) * delta
 
 	move_and_slide()
 
