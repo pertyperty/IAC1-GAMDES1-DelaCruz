@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://o3qwojumfwf1"]
+[gd_scene format=3 uid="uid://o3qwojumfwf1"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://ocmqeoh454wb" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png" id="1_4gyqm"]
+[ext_resource type="Script" uid="uid://ox7a2uub4f6x" path="res://enemy.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://hr6o1qovoedx" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_2.png" id="2_qi2p4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
@@ -14,25 +14,26 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_qi2p4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"enemy",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sweqy"]
-radius = 38.0
+radius = 31.0
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["enemies"]]
+[node name="RigidBody2D" type="RigidBody2D" unique_id=231056669 groups=["enemies"]]
 collision_layer = 2
 collision_mask = 0
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_script")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1133318139]
+rotation = -1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"enemy"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1247366195]
 shape = SubResource("CircleShape2D_sweqy")
