@@ -1,12 +1,40 @@
-[gd_scene format=3 uid="uid://dji0niddtpd3u"]
+[gd_scene load_steps=3 format=3 uid="uid://dji0niddtpd3u"]
 
-[ext_resource type="PackedScene" uid="uid://cktxxcx8xvrrg" path="res://player.tscn" id="1_wbfu4"]
-[ext_resource type="PackedScene" uid="uid://o3qwojumfwf1" path="res://enemy.tscn" id="1_xkndl"]
+[ext_resource type="PackedScene" uid="uid://cktxxcx8xvrrg" path="res://player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://game.gd" id="2_game"]
 
-[node name="Game" type="Node2D" unique_id=693235187]
+[node name="Game" type="Node2D"]
+script = ExtResource("2_game")
 
-[node name="RigidBody2D" parent="." unique_id=1186735491 instance=ExtResource("1_xkndl")]
-position = Vector2(125, 70)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="player" parent="." unique_id=2035040360 instance=ExtResource("1_wbfu4")]
-position = Vector2(235, 347)
+[node name="player" parent="." instance=ExtResource("1_player")]
+position = Vector2(240, 560)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthLabel" type="Label" parent="HUD"]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 180.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 26
+text = "HP: 3 / 3"
+
+[node name="GameOverLabel" type="Label" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 250.0
+offset_right = -25.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "GAME OVER\nPress R to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
