@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://o3qwojumfwf1"]
+
+[ext_resource type="Texture2D" uid="uid://ocmqeoh454wb" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://hr6o1qovoedx" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_2.png" id="2_qi2p4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 0.75,
+"texture": ExtResource("1_4gyqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qi2p4")
+}],
+"loop": 1,
+"name": &"enemy",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sweqy"]
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1186735491]
+rotation = 1.5707964
+gravity_scale = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=270382587]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"enemy"
+frame_progress = 0.3412031
+speed_scale = 0.75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=931603059]
+shape = SubResource("CircleShape2D_sweqy")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=50521575]

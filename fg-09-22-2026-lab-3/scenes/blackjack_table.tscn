@@ -149,7 +149,7 @@ offset_left = 255.0
 offset_top = 325.0
 offset_right = 273.0
 offset_bottom = 356.0
-text = "2"
+text = " 2 "
 
 [node name="Button3" type="Button" parent="GameUI/Controls" unique_id=2088640695]
 layout_mode = 0
@@ -157,7 +157,7 @@ offset_left = 283.0
 offset_top = 325.0
 offset_right = 301.0
 offset_bottom = 356.0
-text = "3"
+text = " 3 "
 
 [node name="Button4" type="Button" parent="GameUI/Controls" unique_id=1161530352]
 layout_mode = 0
@@ -165,7 +165,7 @@ offset_left = 227.0
 offset_top = 366.0
 offset_right = 245.0
 offset_bottom = 397.0
-text = "4"
+text = " 4 "
 
 [node name="Button5" type="Button" parent="GameUI/Controls" unique_id=115197349]
 layout_mode = 0
@@ -173,7 +173,7 @@ offset_left = 256.0
 offset_top = 367.0
 offset_right = 274.0
 offset_bottom = 398.0
-text = "5"
+text = " 5 "
 
 [node name="Button6" type="Button" parent="GameUI/Controls" unique_id=339307451]
 layout_mode = 0
@@ -181,7 +181,7 @@ offset_left = 285.0
 offset_top = 370.0
 offset_right = 303.0
 offset_bottom = 401.0
-text = "6"
+text = " 6 "
 
 [node name="Button7" type="Button" parent="GameUI/Controls" unique_id=1578409966]
 layout_mode = 0
@@ -189,7 +189,7 @@ offset_left = 229.0
 offset_top = 404.0
 offset_right = 247.0
 offset_bottom = 435.0
-text = "7"
+text = " 7 "
 
 [node name="Button8" type="Button" parent="GameUI/Controls" unique_id=1676640868]
 layout_mode = 0
@@ -197,7 +197,7 @@ offset_left = 256.0
 offset_top = 402.0
 offset_right = 274.0
 offset_bottom = 433.0
-text = "8"
+text = " 8 "
 
 [node name="Button9" type="Button" parent="GameUI/Controls" unique_id=1056756746]
 layout_mode = 0
@@ -205,7 +205,7 @@ offset_left = 285.0
 offset_top = 408.0
 offset_right = 303.0
 offset_bottom = 439.0
-text = "9"
+text = " 9 "
 
 [node name="ClearButton" type="Button" parent="GameUI/Controls" unique_id=2027781619]
 layout_mode = 0
@@ -213,30 +213,30 @@ offset_left = 256.0
 offset_top = 445.0
 offset_right = 305.0
 offset_bottom = 476.0
-text = "Clear"
+text = " Clear "
 
 [node name="BalanceLabel" type="Label" parent="GameUI/Controls" unique_id=1377758855]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 79.0
-offset_bottom = 29.0
+offset_left = 821.0
+offset_top = 312.0
+offset_right = 891.0
+offset_bottom = 335.0
 text = "Balance: "
 
 [node name="BetLabel" type="Label" parent="GameUI/Controls" unique_id=976721349]
 layout_mode = 0
 offset_left = 820.0
-offset_top = 309.0
+offset_top = 348.0
 offset_right = 860.0
-offset_bottom = 332.0
+offset_bottom = 371.0
 text = "Bet: "
 
 [node name="BetStatusLabel" type="Label" parent="GameUI/Controls" unique_id=1000180339]
 layout_mode = 0
 offset_left = 820.0
-offset_top = 344.0
+offset_top = 383.0
 offset_right = 869.0
-offset_bottom = 367.0
+offset_bottom = 406.0
 text = "Status"
 
 [node name="PlayPromptLabel" type="Label" parent="GameUI/Controls" unique_id=66403530]
