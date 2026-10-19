@@ -48,6 +48,11 @@ right={
 ]
 }
 
+start_game={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194309)]
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

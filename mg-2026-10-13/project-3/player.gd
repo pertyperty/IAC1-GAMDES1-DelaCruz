@@ -7,52 +7,67 @@ signal died
 @export var max_health: int = 3
 @export var invincibility_duration: float = 1.0
 
-var health: int
+var health: int = 3
+var alive := false
+var invincible := false
+var damage_timer := 0.0
 var screen_size: Vector2
-var invincible: bool = false
-var alive: bool = true
-var damage_timer: float = 0.0
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	health = max_health
 	collision_mask = 2
 	body_entered.connect(_on_body_entered)
+	hide()
+	set_process(false)
+	set_deferred("monitoring", false)
+
+func start(start_position: Vector2) -> void:
+	position = start_position
+	health = max_health
+	alive = true
+	invincible = false
+	damage_timer = 0.0
+	$AnimatedSprite2D.modulate.a = 1.0
+	$AnimatedSprite2D.play("up")
+	show()
+	set_process(true)
+	set_deferred("monitoring", true)
 	health_changed.emit(health, max_health)
 
 func _process(delta: float) -> void:
 	if not alive:
 		return
-
 	if invincible:
 		damage_timer -= delta
-		$AnimatedSprite2D.modulate.a = 0.45 if int(Time.get_ticks_msec() / 120) % 2 == 0 else 1.0
+		$AnimatedSprite2D.modulate.a = 0.4 if (Time.get_ticks_msec() / 120) % 2 == 0 else 1.0
 		if damage_timer <= 0.0:
 			invincible = false
 			$AnimatedSprite2D.modulate.a = 1.0
 
-	var velocity := Input.get_vector("left", "right", "up", "down")
-	if velocity != Vector2.ZERO:
-		$AnimatedSprite2D.play("walk")
+	var movement := Input.get_vector("left", "right", "up", "down")
+	if movement != Vector2.ZERO:
+		$AnimatedSprite2D.animation = "walk" if movement.x != 0 else "up"
+		$AnimatedSprite2D.flip_h = movement.x < 0
+		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
-
-	position += velocity * speed * delta
+	position += movement * speed * delta
 	position = position.clamp(Vector2(28.0, 35.0), screen_size - Vector2(28.0, 35.0))
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemies"):
+	if body.is_in_group("mobs"):
 		take_damage(1)
 
 func take_damage(amount: int = 1) -> void:
 	if not alive or invincible:
 		return
-	health = maxi(health - amount, 0)
+	health = maxi(0, health - amount)
 	health_changed.emit(health, max_health)
 	if health == 0:
 		alive = false
-		$AnimatedSprite2D.stop()
-		$AnimatedSprite2D.modulate.a = 1.0
+		hide()
+		set_process(false)
+		set_deferred("monitoring", false)
 		died.emit()
 	else:
 		invincible = true
