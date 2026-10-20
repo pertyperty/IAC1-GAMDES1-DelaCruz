@@ -18,3 +18,11 @@ Open this directory in Godot 4 and run **Game.tscn** (F5).
 
 ## Tutorial differences
 Retains the earlier project's **3 HP and invincibility** rather than ending on the first hit. Enemy recycling was replaced with tutorial-style periodic spawning and deletion; this prevents perpetual enemies from carrying across rounds. Enemy sprites and sound files come from the existing tutorial asset folder.
+## Verification
+Open the project in the Godot editor and confirm imports, animation, random spawning, collisions, audio, start/restart and score. This commit has not been runtime-tested in Godot.
+
+
+## Fixes after tutorial adaptation
+- Mobs now aim toward randomly chosen **interior** arena points instead of relying on perimeter path rotation. The previous path winding made the +90° direction point outward.
+- Surviving mobs are cleared as soon as a round ends, preventing collisions with a respawned player.
+- Damage flicker uses explicit integer conversion for reliable modulo arithmetic.

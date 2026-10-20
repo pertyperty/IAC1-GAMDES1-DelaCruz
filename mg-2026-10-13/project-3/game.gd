@@ -37,6 +37,8 @@ func game_over() -> void:
 	$ScoreTimer.stop()
 	$Music.stop()
 	$DeathSound.play()
+	# Clear remaining mobs so they cannot hit the player during a new round.
+	get_tree().call_group("mobs", "queue_free")
 	$HUD.show_game_over()
 
 func _on_start_timer_timeout() -> void:
@@ -55,9 +57,15 @@ func _on_mob_timer_timeout() -> void:
 	var mob := mob_scene.instantiate() as RigidBody2D
 	var location := $MobPath/MobSpawnLocation as PathFollow2D
 	location.progress_ratio = randf()
-	var direction: float = location.rotation + PI / 2.0
-	direction += randf_range(-PI / 4.0, PI / 4.0)
+	# Aim toward a random point inside the arena. This is independent of
+	# the clockwise/counterclockwise direction of the perimeter path.
+	var viewport_size := get_viewport_rect().size
+	var target := Vector2(
+		randf_range(viewport_size.x * 0.25, viewport_size.x * 0.75),
+		randf_range(viewport_size.y * 0.25, viewport_size.y * 0.75)
+	)
+	var direction := (target - location.position).angle()
 	mob.position = location.position
 	mob.rotation = direction
-	mob.linear_velocity = Vector2(randf_range(150.0, 250.0), 0.0).rotated(direction)
+	mob.linear_velocity = Vector2.RIGHT.rotated(direction) * randf_range(150.0, 250.0)
 	$Enemies.add_child(mob)
