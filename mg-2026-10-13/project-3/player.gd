@@ -28,6 +28,8 @@ func start(start_position: Vector2) -> void:
 	invincible = false
 	damage_timer = 0.0
 	$AnimatedSprite2D.modulate.a = 1.0
+	$AnimatedSprite2D.rotation = 0.0
+	$AnimatedSprite2D.flip_h = false
 	$AnimatedSprite2D.play("up")
 	show()
 	set_process(true)
@@ -46,9 +48,13 @@ func _process(delta: float) -> void:
 
 	var movement := Input.get_vector("left", "right", "up", "down")
 	if movement != Vector2.ZERO:
-		$AnimatedSprite2D.animation = "walk" if movement.x != 0 else "up"
-		$AnimatedSprite2D.flip_h = movement.x < 0
-		$AnimatedSprite2D.play()
+		# The source sprites face up. Rotate them to the movement vector.
+		# Input.get_vector normalizes diagonals, so diagonal movement is not faster.
+		# Angle is snapped to 45-degree increments (8 possible facings).
+		var facing := snappedf(movement.angle() + PI / 2.0, PI / 4.0)
+		$AnimatedSprite2D.rotation = facing
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.play("walk")
 	else:
 		$AnimatedSprite2D.stop()
 	position += movement * speed * delta
