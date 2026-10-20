@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		return
 	if invincible:
 		damage_timer -= delta
-		$AnimatedSprite2D.modulate.a = 0.4 if (Time.get_ticks_msec() / 120) % 2 == 0 else 1.0
+		$AnimatedSprite2D.modulate.a = 0.4 if int(Time.get_ticks_msec() / 120) % 2 == 0 else 1.0
 		if damage_timer <= 0.0:
 			invincible = false
 			$AnimatedSprite2D.modulate.a = 1.0
