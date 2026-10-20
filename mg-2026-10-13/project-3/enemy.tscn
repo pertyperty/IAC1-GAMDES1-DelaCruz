@@ -1,27 +1,45 @@
-[gd_scene load_steps=10 format=3 uid="uid://o3qwojumfwf1"]
+[gd_scene format=3 uid="uid://o3qwojumfwf1"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png" id="2"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_2.png" id="3"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemySwimming_1.png" id="4"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemySwimming_2.png" id="5"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="6"]
-[ext_resource type="Texture2D" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_2.png" id="7"]
+[ext_resource type="Script" uid="uid://ox7a2uub4f6x" path="res://enemy.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ocmqeoh454wb" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://hr6o1qovoedx" path="res://dodge_the_creeps_2d_assets/art/enemyFlyingAlt_2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b13nq6ow4wxbr" path="res://dodge_the_creeps_2d_assets/art/enemySwimming_1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://coilum5xce6v7" path="res://dodge_the_creeps_2d_assets/art/enemySwimming_2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dkiymicysunu6" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_1.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://4kuf5v2nntuy" path="res://dodge_the_creeps_2d_assets/art/enemyWalking_2.png" id="7"]
 
 [sub_resource type="SpriteFrames" id="Frames"]
 animations = [{
-"frames": [{"duration": 1.0, "texture": ExtResource("2")}, {"duration": 1.0, "texture": ExtResource("3")}],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
+"loop": 1,
 "name": &"fly",
 "speed": 3.0
 }, {
-"frames": [{"duration": 1.0, "texture": ExtResource("4")}, {"duration": 1.0, "texture": ExtResource("5")}],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}],
+"loop": 1,
 "name": &"swim",
 "speed": 3.0
 }, {
-"frames": [{"duration": 1.0, "texture": ExtResource("6")}, {"duration": 1.0, "texture": ExtResource("7")}],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}],
+"loop": 1,
 "name": &"walk",
 "speed": 3.0
 }]
@@ -30,23 +48,23 @@ animations = [{
 radius = 27.0
 height = 70.0
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["mobs"]]
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1120245429 groups=["mobs"]]
 collision_layer = 2
 collision_mask = 0
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1513074920]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("Frames")
 animation = &"fly"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1267029814]
 rotation = 1.5707964
 shape = SubResource("Shape")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=334222010]
 rect = Rect2(-50, -50, 100, 100)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
