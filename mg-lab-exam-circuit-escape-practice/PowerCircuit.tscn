@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dv4fr2lma5nly"]
+
+[ext_resource type="Script" uid="uid://csov6leypkfle" path="res://Scripts/Power_Circuit.gd" id="1_g38is"]
+[ext_resource type="Texture2D" uid="uid://b7u6fsrcjdnoc" path="res://icon.svg" id="1_phltm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6whbp"]
+radius = 20.0
+
+[node name="PowerCircuit" type="Area2D" unique_id=292440159]
+script = ExtResource("1_g38is")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=489377522]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_phltm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=26659205]
+shape = SubResource("CircleShape2D_6whbp")
